@@ -94,9 +94,18 @@ $ slack activity --tail
 
 ## Adding Function to Workflow Builder
 
-This function can be used in [Workflow Builder](https://slack.com/help/articles/16962850225939-Build-a-workflow) once the app is installed to your workspace (either through `slack run` or `slack deploy`). To access Workflow Builder, you can go to the "Tools" option under your workspace and select "Workflow Builder".
+This function can be used in
+[Workflow Builder](https://slack.com/help/articles/16962850225939-Build-a-workflow)
+once the app is installed to your workspace (either through `slack run` or
+`slack deploy`). To access Workflow Builder, you can go to the "Tools" option
+under your workspace and select "Workflow Builder".
 
-From here, you can create a new workflow. Functions from installed apps can be added as a step within Workflow Builder; to add it, search for your app name in the "Steps" sidebar when you're building out your new workflow and you should see the app's related functions show up in the results. You can select this option and fill out the needed inputs to pass into the function. At this point, the function will be added as a step in your workflow! 
+From here, you can create a new workflow. Functions from installed apps can be
+added as a step within Workflow Builder; to add it, search for your app name in
+the "Steps" sidebar when you're building out your new workflow and you should
+see the app's related functions show up in the results. You can select this
+option and fill out the needed inputs to pass into the function. At this point,
+the function will be added as a step in your workflow!
 
 ## Project Structure
 
