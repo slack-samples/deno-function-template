@@ -8,9 +8,9 @@ const { createContext } = SlackFunctionTester("sample_function");
 // Replaces globalThis.fetch with the mocked copy
 mf.install();
 
-mf.mock("POST@/api/apps.datastore.put", () => {
+mf.mock("POST@/api/chat.postMessage", () => {
   return new Response(
-    `{"ok": true, "item": {"object_id": "d908f8bd-00c6-43f0-9fc3-4da3c2746e14"}}`,
+    `{"ok": true}`,
     {
       status: 200,
     },
@@ -21,7 +21,11 @@ Deno.test("Sample function test", async () => {
   const inputs = { message: "Hello, World!", user: "U01234567" };
   const { outputs } = await SampleFunction(createContext({ inputs }));
   await assertEquals(
-    outputs?.updatedMsg,
-    ":wave: <@U01234567> submitted the following message: \n\n>Hello, World!",
+    outputs?.message,
+    "Hello, World!",
+  );
+  await assertEquals(
+    outputs?.user,
+    "U01234567",
   );
 });

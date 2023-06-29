@@ -1,6 +1,5 @@
 import { Manifest } from "deno-slack-sdk/mod.ts";
-import SampleWorkflow from "./workflows/sample_workflow.ts";
-import SampleObjectDatastore from "./datastores/sample_datastore.ts";
+import { SampleFunctionDefinition } from "./functions/sample_function.ts";
 
 /**
  * The app manifest contains the app's configuration. This
@@ -8,12 +7,13 @@ import SampleObjectDatastore from "./datastores/sample_datastore.ts";
  * https://api.slack.com/automation/manifest
  */
 export default Manifest({
-  name: "alissa-starter-template",
-  description: "A template for building Slack apps with Deno",
+  name: "deno-function-template",
+  description: "A template for building standalone functions in Slack",
   icon: "assets/default_new_app_icon.png",
-  workflows: [SampleWorkflow],
+  workflows: [],
+  functions: [SampleFunctionDefinition],
   outgoingDomains: [],
-  datastores: [SampleObjectDatastore],
+  datastores: [],
   botScopes: [
     "commands",
     "chat:write",

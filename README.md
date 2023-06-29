@@ -1,7 +1,6 @@
-# Deno Starter Template
+# Deno Function Template
 
-This is a scaffolded Deno template used to build out Slack apps using the Slack
-CLI.
+This is a template used to build out a single, workflow-less function.
 
 **Guide Outline**:
 
@@ -9,11 +8,10 @@ CLI.
   - [Install the Slack CLI](#install-the-slack-cli)
   - [Clone the Template](#clone-the-template)
 - [Running Your Project Locally](#running-your-project-locally)
-- [Creating Triggers](#creating-triggers)
-- [Datastores](#datastores)
 - [Testing](#testing)
 - [Deploying Your App](#deploying-your-app)
 - [Viewing Activity Logs](#viewing-activity-logs)
+- [Adding Function to Workflow Builder](#adding-function-to-workflow-builder)
 - [Project Structure](#project-structure)
 - [Resources](#resources)
 
@@ -38,7 +36,7 @@ Start by cloning this repository:
 
 ```zsh
 # Clone this project onto your machine
-$ slack create my-app -t slack-samples/deno-starter-template
+$ slack create my-app -t slack-samples/deno-function-template
 
 # Change into the project directory
 $ cd my-app
@@ -58,58 +56,6 @@ Connected, awaiting events
 ```
 
 To stop running locally, press `<CTRL> + C` to end the process.
-
-## Creating Triggers
-
-[Triggers](https://api.slack.com/automation/triggers) are what cause workflows
-to run. These triggers can be invoked by a user, or automatically as a response
-to an event within Slack.
-
-When you `run` or `deploy` your project for the first time, the CLI will prompt
-you to create a trigger if one is found in the `triggers/` directory. For any
-subsequent triggers added to the application, each must be
-[manually added using the `trigger create` command](#manual-trigger-creation).
-
-When creating triggers, you must select the workspace and environment that you'd
-like to create the trigger in. Each workspace can have a local development
-version (denoted by `(local)`), as well as a deployed version. _Triggers created
-in a local environment will only be available to use when running the
-application locally._
-
-### Link Triggers
-
-A [link trigger](https://api.slack.com/automation/triggers/link) is a type of
-trigger that generates a **Shortcut URL** which, when posted in a channel or
-added as a bookmark, becomes a link. When clicked, the link trigger will run the
-associated workflow.
-
-Link triggers are _unique to each installed version of your app_. This means
-that Shortcut URLs will be different across each workspace, as well as between
-[locally run](#running-your-project-locally) and
-[deployed apps](#deploying-your-app).
-
-With link triggers, after selecting a workspace and environment, the output
-provided will include a Shortcut URL. Copy and paste this URL into a channel as
-a message, or add it as a bookmark in a channel of the workspace you selected.
-Interacting with this link will run the associated workflow.
-
-**Note: triggers won't run the workflow unless the app is either running locally
-or deployed!**
-
-### Manual Trigger Creation
-
-To manually create a trigger, use the following command:
-
-```zsh
-$ slack trigger create --trigger-def triggers/sample_trigger.ts
-```
-
-## Datastores
-
-For storing data related to your app, datastores offer secure storage on Slack
-infrastructure. For an example of a datastore, see
-`datastores/sample_datastore.ts`. The use of a datastore requires the
-`datastore:write`/`datastore:read` scopes to be present in your manifest.
 
 ## Testing
 
@@ -146,6 +92,21 @@ following command:
 $ slack activity --tail
 ```
 
+## Adding Function to Workflow Builder
+
+This function can be used in
+[Workflow Builder](https://slack.com/help/articles/16962850225939-Build-a-workflow)
+once the app is installed to your workspace (either through `slack run` or
+`slack deploy`). To access Workflow Builder, you can go to the "Tools" option
+under your workspace and select "Workflow Builder".
+
+From here, you can create a new workflow. Functions from installed apps can be
+added as a step within Workflow Builder; to add it, search for your app name in
+the "Steps" sidebar when you're building out your new workflow and you should
+see the app's related functions show up in the results. You can select this
+option and fill out the needed inputs to pass into the function. At this point,
+the function will be added as a step in your workflow!
+
 ## Project Structure
 
 ### `.slack/`
@@ -153,32 +114,11 @@ $ slack activity --tail
 Contains `apps.dev.json` and `apps.json`, which include installation details for
 development and deployed apps.
 
-### `datastores/`
-
-[Datastores](https://api.slack.com/automation/datastores) securely store data
-for your application on Slack infrastructure. Required scopes to use datastores
-include `datastore:write` and `datastore:read`.
-
 ### `functions/`
 
 [Functions](https://api.slack.com/automation/functions) are reusable building
 blocks of automation that accept inputs, perform calculations, and provide
 outputs. Functions can be used independently or as steps in workflows.
-
-### `triggers/`
-
-[Triggers](https://api.slack.com/automation/triggers) determine when workflows
-are run. A trigger file describes the scenario in which a workflow should be
-run, such as a user pressing a button or when a specific event occurs.
-
-### `workflows/`
-
-A [workflow](https://api.slack.com/automation/workflows) is a set of steps
-(functions) that are executed in order.
-
-Workflows can be configured to run without user input or they can collect input
-by beginning with a [form](https://api.slack.com/automation/forms) before
-continuing to the next step.
 
 ### `manifest.ts`
 

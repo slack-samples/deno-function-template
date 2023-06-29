@@ -1,5 +1,4 @@
 import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
-import SampleObjectDatastore from "../datastores/sample_datastore.ts";
 
 /**
  * Functions are reusable building blocks of automation that accept
@@ -16,23 +15,27 @@ export const SampleFunctionDefinition = DefineFunction({
     properties: {
       message: {
         type: Schema.types.string,
-        description: "Message to be posted",
+        description: "Message to send",
       },
       user: {
         type: Schema.slack.types.user_id,
-        description: "The user invoking the workflow",
+        description: "User to send message to",
       },
     },
-    required: ["message"],
+    required: ["message", "user"],
   },
   output_parameters: {
     properties: {
-      updatedMsg: {
+      message: {
         type: Schema.types.string,
-        description: "Updated message to be posted",
+        description: "Message that was sent",
+      },
+      user: {
+        type: Schema.slack.types.user_id,
+        description: "User the message was sent to",
       },
     },
-    required: ["updatedMsg"],
+    required: ["message", "user"],
   },
 });
 
@@ -45,28 +48,17 @@ export const SampleFunctionDefinition = DefineFunction({
 export default SlackFunction(
   SampleFunctionDefinition,
   async ({ inputs, client }) => {
-    const uuid = crypto.randomUUID();
+    const { message, user } = inputs;
 
-    // inputs.user is set from the interactivity_context defined in sample_trigger.ts
-    // https://api.slack.com/automation/forms#add-interactivity
-    const updatedMsg = `:wave: ` + `<@${inputs.user}>` +
-      ` submitted the following message: \n\n>${inputs.message}`;
+    const formattedMessage = `:wave: ` + `<@${user}>` +
+      ` submitted the following message: \n\n>${message}`;
 
-    const sampleObject = {
-      original_msg: inputs.message,
-      updated_msg: updatedMsg,
-      object_id: uuid,
-    };
+    await client.chat.postMessage({
+      channel: user,
+      text: formattedMessage,
+    });
 
-    // Save the sample object to the datastore
-    // https://api.slack.com/automation/datastores
-    await client.apps.datastore.put<typeof SampleObjectDatastore.definition>(
-      {
-        datastore: "SampleObjects",
-        item: sampleObject,
-      },
-    );
-
-    return { outputs: { updatedMsg } };
+    // Outputs are made available as variables for use in subsequent functions
+    return { outputs: { message, user } };
   },
 );
