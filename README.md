@@ -1,6 +1,8 @@
 # Deno Function Template
 
-This is a template used to build out a single, workflow-less function.
+This is a template used to build out a single, workflow-less function. To learn
+more, read the tutorial on creating
+[custom functions for Workflow Builder](https://api.slack.com/tutorials/tracks/wfb-function).
 
 **Guide Outline**:
 
