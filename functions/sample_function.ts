@@ -1,4 +1,8 @@
-import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
+import {
+  DefineFunction,
+  Schema,
+  SlackFunction,
+} from "https://deno.land/x/deno_slack_sdk@2.1.4/mod.ts";
 
 /**
  * Functions are reusable building blocks of automation that accept

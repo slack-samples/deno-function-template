@@ -1,4 +1,4 @@
-import { SlackFunctionTester } from "deno-slack-sdk/mod.ts";
+import { SlackFunctionTester } from "https://deno.land/x/deno_slack_sdk@2.2.0/mod.ts";
 import { assertEquals } from "https://deno.land/std@0.153.0/testing/asserts.ts";
 import SampleFunction from "./sample_function.ts";
 import * as mf from "https://deno.land/x/mock_fetch@0.3.0/mod.ts";
