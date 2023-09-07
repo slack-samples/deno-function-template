@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../deno-slack-hub/src"
+		},
+		{
+			"path": "../deno-slack-hub/scripts"
+		}
+	],
+	"settings": {
+		"deno.lint": true,
+		"deno.suggest.imports.hosts": {
+			"https://deno.land": false
+		}
+	}
+}

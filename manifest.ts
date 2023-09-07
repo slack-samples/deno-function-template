@@ -1,5 +1,4 @@
 import { Manifest } from "https://deno.land/x/deno_slack_sdk@2.2.0/mod.ts";
-import { SampleFunctionDefinition } from "./functions/sample_function.ts";
 
 /**
  * The app manifest contains the app's configuration. This
@@ -11,7 +10,7 @@ export default Manifest({
   description: "A template for building standalone functions in Slack",
   icon: "assets/default_new_app_icon.png",
   workflows: [],
-  functions: [SampleFunctionDefinition],
+  functions: [],
   outgoingDomains: [],
   datastores: [],
   botScopes: [
