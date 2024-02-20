@@ -12,12 +12,9 @@ export default Manifest({
   icon: "assets/default_new_app_icon.png",
   functions: [SampleFunctionDefinition],
   outgoingDomains: [],
-  datastores: [],
   botScopes: [
     "commands",
     "chat:write",
     "chat:write.public",
-    "datastore:read",
-    "datastore:write",
   ],
 });
