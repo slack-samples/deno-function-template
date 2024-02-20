@@ -10,7 +10,6 @@ export default Manifest({
   name: "deno-function-template",
   description: "A template for building standalone functions in Slack",
   icon: "assets/default_new_app_icon.png",
-  workflows: [],
   functions: [SampleFunctionDefinition],
   outgoingDomains: [],
   datastores: [],
