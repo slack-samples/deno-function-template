@@ -19,13 +19,8 @@ mf.mock("POST@/api/chat.postMessage", () => {
 
 Deno.test("Sample function test", async () => {
   const inputs = { message: "Hello, World!", user: "U01234567" };
-  const { outputs } = await SampleFunction(createContext({ inputs }));
-  await assertEquals(
-    outputs?.message,
-    "Hello, World!",
-  );
-  await assertEquals(
-    outputs?.user,
-    "U01234567",
-  );
+  const { outputs, error } = await SampleFunction(createContext({ inputs }));
+  assertEquals(error, undefined);
+  assertEquals(outputs?.message, "Hello, World!");
+  assertEquals(outputs?.user, "U01234567");
 });
