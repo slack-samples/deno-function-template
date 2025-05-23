@@ -50,8 +50,8 @@ export default SlackFunction(
   async ({ inputs, client }) => {
     const { message, user } = inputs;
 
-    const formattedMessage = `:wave: ` + `<@${user}>` +
-      ` submitted the following message: \n\n>${message}`;
+    const formattedMessage =
+      `:wave: <@${user}> submitted the following message: \n\n>${message}`;
 
     await client.chat.postMessage({
       channel: user,
