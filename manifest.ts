@@ -1,4 +1,4 @@
-import { Manifest } from "deno-slack-sdk/mod.ts";
+import { Manifest } from "@slack/sdk";
 import { SampleFunctionDefinition } from "./functions/sample_function.ts";
 
 /**
